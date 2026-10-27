@@ -1,0 +1,8 @@
+/target
+/dist
+*.tar.gz
+*.zip
+SHA256SUMS.txt
+.DS_Store
+*.swp
+*~

@@ -1,0 +1,53 @@
+[package]
+name = "cadence"
+version = "0.1.0"
+edition = "2021"
+authors = ["Noel Paffhausen"]
+description = "A fast, minimalist, immersive local terminal music player in Rust"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/NoelPaff/cadence"
+homepage = "https://github.com/NoelPaff/cadence"
+keywords = ["music", "player", "tui", "terminal", "audio"]
+categories = ["multimedia::audio", "command-line-utilities"]
+
+[lib]
+name = "cadence"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cadence"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0"
+base64 = "0.22"
+clap = { version = "4.5", features = ["derive"] }
+crossterm = "0.28"
+dirs = "5.0"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp", "bmp", "gif"] }
+lofty = "0.22"
+rand = "0.8"
+ratatui = "0.29"
+rustfft = "6.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+symphonia = { version = "0.5.4", features = ["all"] }
+toml = "0.8"
+unicode-width = "0.2"
+walkdir = "2.5"
+
+[target.'cfg(unix)'.dependencies]
+libloading = "0.8"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+zbus = { version = "5", features = ["blocking-api"] }
+
+[target.'cfg(any(target_os = "macos", target_os = "windows"))'.dependencies]
+cpal = "0.15"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
